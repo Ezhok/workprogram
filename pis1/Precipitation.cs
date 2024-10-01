@@ -7,25 +7,19 @@ using System.Threading.Tasks;
 
 namespace pis1
 {
-    internal class Precipitation: IMetering
+    internal class Precipitation: MeteoData
     {
-        public string Place { get; set; }
-        public DateTime Date { get; set; }
         public double Humidity { get; set; }
-        public int Pressure { get; set; }
+        public double Pressure { get; set; }
 
-        public Precipitation(string input)
+        public Precipitation(string input) : base(input)
         {
-            input = input.Replace("'", "");
             string[] dates = input.Split(';');
-
-            Place = dates[0];
-            Date = DateTime.ParseExact(dates[1], "yyyy.MM.dd", CultureInfo.InvariantCulture);
             Humidity = double.Parse(dates[2], CultureInfo.InvariantCulture);
-            Pressure = int.Parse(dates[3], CultureInfo.InvariantCulture);
+            Pressure = double.Parse(dates[3], CultureInfo.InvariantCulture);
         }
 
-        public void DisplayData()
+        public override void DisplayData()
         {
             Console.WriteLine($"Место измерения: {Place}");
             Console.WriteLine($"Дата измерений: {Date.ToString("yyyy.MM.dd")}");

@@ -7,25 +7,19 @@ using System.Threading.Tasks;
 
 namespace pis1
 {
-    internal class Wind: IMetering
+    internal class Wind: MeteoData
     {
-        public string Place { get; set; }
-        public DateTime Date { get; set; }
         public double Speed { get; set; }
         public string Direction { get; set; }
 
-        public Wind(string input)
+        public Wind(string input) : base(input)
         {
-            input = input.Replace("'", "");
             string[] dates = input.Split(';');
-
-            Place = dates[0];
-            Date = DateTime.ParseExact(dates[1], "yyyy.MM.dd", CultureInfo.InvariantCulture);
             Speed = double.Parse(dates[2], CultureInfo.InvariantCulture);
             Direction = dates[3];
         }
 
-        public void DisplayData()
+        public override void DisplayData()
         {
             Console.WriteLine($"Место измерения: {Place}");
             Console.WriteLine($"Дата измерений: {Date.ToString("yyyy.MM.dd")}");
