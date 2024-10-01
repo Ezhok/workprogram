@@ -4,18 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace pis1
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Meteo meterReading = new Meteo("'Санкт-Пиетербург';2005.03.27;24.6");
+            Meteo meterReading = new Meteo("'Санкт-Петербург';2005.03.27;24.6");
+            meterReading.DisplayData();
 
-            Console.WriteLine($"Место измерения: {meterReading.place}");
-            Console.WriteLine($"Дата измерений:{meterReading.data.ToString("yyyy.MM.dd")}") ;
-            Console.WriteLine($"Результаты измерений: {meterReading.value}");
-            Console.WriteLine("T,encz rjirb");
+            Wind windReading = new Wind("'Санкт-Петербург';2005.03.27;5.2;Северный");
+            windReading.DisplayData();
+
+            Precipitation precipitationReading = new Precipitation("'Санкт-Петербург';2005.03.27;60;760");
+            precipitationReading.DisplayData();
+
         }
     }
 }
