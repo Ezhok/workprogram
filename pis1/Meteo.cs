@@ -12,16 +12,16 @@ namespace pis1
     {
         public double Value { get; set; }
 
-        public Meteo(string input) : base(input)
+        public Meteo(string place, string date, double value) : base(place, date)
         {
-            Value = double.Parse(input.Split(';')[2], CultureInfo.InvariantCulture);
+            Value = value;
         }
 
         public override void DisplayData()
         {
             Console.WriteLine($"Место измерения: {Place}");
             Console.WriteLine($"Дата измерений: {Date.ToString("yyyy.MM.dd")}");
-            Console.WriteLine($"Результаты измерений: {Value}");
+            Console.WriteLine($"Результаты измерений: {Value} \n");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -12,14 +13,13 @@ namespace pis1
         public string Place { get; set; }
         public DateTime Date { get; set; }
 
-        public MeteoData(string input)
+        public MeteoData(string place, string date)
         {
-            input = input.Replace("'", "");
-            string[] dates = input.Split(';');
-
-            Place = dates[0];
-            Date = DateTime.ParseExact(dates[1], "yyyy.MM.dd", CultureInfo.InvariantCulture);
+            Place = place;
+            Date = DateTime.ParseExact(date, "yyyy.MM.dd", CultureInfo.InvariantCulture);
         }
+
+        
 
         public abstract void DisplayData();
     }

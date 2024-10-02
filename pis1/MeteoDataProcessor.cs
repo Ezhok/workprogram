@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Globalization;
 
 namespace pis1
 {
@@ -11,39 +12,37 @@ namespace pis1
     {
         public static void ProcessData(string input)
         {
-            string[] lines = input.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            string[] lines = input.Split('|');
+
+            
 
             foreach (string line in lines)
             {
-                Console.WriteLine("Обрабатывается строка: " + line);
+                string[] parts = line.Split(';');
+                string type = parts[0];
+                string place = parts[1].Replace("'", "");
+                string date = parts[2];
+                
 
-                if (line.Contains(";"))
+                if (type == "Meteo")
                 {
-                    string[] parts = line.Split(';');
-                    Console.WriteLine("Разделение строки: ");
-                    foreach (string part in parts)
-                    {
-                        Console.WriteLine(part);
-                    }
-
-                    if (parts.Length == 3)
-                    {
-                        Meteo meteo = new Meteo(line);
-                        meteo.DisplayData();
-                    }
-                    else if (parts.Length == 4)
-                    {
-                        if (parts[3].Contains("Северный") || parts[3].Contains("Южный") || parts[3].Contains("Восточный") || parts[3].Contains("Западный"))
-                        {
-                            Wind wind = new Wind(line);
-                            wind.DisplayData();
-                        }
-                        else
-                        {
-                            Precipitation precipitation = new Precipitation(line);
-                            precipitation.DisplayData();
-                        }
-                    }
+                    double value = double.Parse(parts[3], CultureInfo.InvariantCulture);
+                    Meteo meteo = new Meteo(place, date, value);
+                    meteo.DisplayData();
+                }
+                else if (type == "Wind")
+                {
+                    double speed = double.Parse(parts[3], CultureInfo.InvariantCulture);
+                    string direction = parts[4];
+                    Wind wind = new Wind(place, date, speed, direction);
+                    wind.DisplayData();
+                }
+                else if (type == "Precipitation")
+                {
+                    double humidity = double.Parse(parts[3], CultureInfo.InvariantCulture);
+                    double pressure = double.Parse(parts[4], CultureInfo.InvariantCulture);
+                    Precipitation precipitation = new Precipitation(place, date, humidity, pressure);
+                    precipitation.DisplayData();
                 }
             }
         }

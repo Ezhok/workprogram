@@ -12,11 +12,10 @@ namespace pis1
         public double Humidity { get; set; }
         public double Pressure { get; set; }
 
-        public Precipitation(string input) : base(input)
+        public Precipitation(string place, string date, double humidity, double pressure) : base(place, date)
         {
-            string[] dates = input.Split(';');
-            Humidity = double.Parse(dates[2], CultureInfo.InvariantCulture);
-            Pressure = double.Parse(dates[3], CultureInfo.InvariantCulture);
+            Humidity = humidity;
+            Pressure = pressure;
         }
 
         public override void DisplayData()
@@ -24,7 +23,7 @@ namespace pis1
             Console.WriteLine($"Место измерения: {Place}");
             Console.WriteLine($"Дата измерений: {Date.ToString("yyyy.MM.dd")}");
             Console.WriteLine($"Влажность: {Humidity}%");
-            Console.WriteLine($"Давление: {Pressure} мм рт. ст.");
+            Console.WriteLine($"Давление: {Pressure} мм рт. ст.\n");
         }
     }
 }

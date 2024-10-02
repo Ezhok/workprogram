@@ -12,11 +12,10 @@ namespace pis1
         public double Speed { get; set; }
         public string Direction { get; set; }
 
-        public Wind(string input) : base(input)
+        public Wind(string place, string date, double speed, string direction) : base(place, date)
         {
-            string[] dates = input.Split(';');
-            Speed = double.Parse(dates[2], CultureInfo.InvariantCulture);
-            Direction = dates[3];
+            Speed = speed;
+            Direction = direction;
         }
 
         public override void DisplayData()
@@ -24,7 +23,7 @@ namespace pis1
             Console.WriteLine($"Место измерения: {Place}");
             Console.WriteLine($"Дата измерений: {Date.ToString("yyyy.MM.dd")}");
             Console.WriteLine($"Сила ветра: {Speed} м/с");
-            Console.WriteLine($"Направление ветра: {Direction}");
+            Console.WriteLine($"Направление ветра: {Direction}\n");
         }
     }
 }
