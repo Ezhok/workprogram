@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace pis1
 {
-    internal abstract class MeteoData
+    public abstract class MeteoData
     {
         public string Place { get; set; }
         public DateTime Date { get; set; }
 
         public MeteoData(string place, string date)
         {
-            Place = place;
-            Date = DateTime.ParseExact(date, "yyyy.MM.dd", CultureInfo.InvariantCulture);
+            Place = place ?? throw new ArgumentNullException(nameof(place));
+
+            try
+            {
+                Date = DateTime.ParseExact(date, "yyyy.MM.dd", CultureInfo.InvariantCulture);
+            }
+            catch (FormatException)
+            {
+                throw new ArgumentException($"Некорректный формат даты: {date}. Ожидается формат yyyy.MM.dd.", nameof(date));
+            }
         }
 
         

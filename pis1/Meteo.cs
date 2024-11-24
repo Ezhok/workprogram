@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace pis1
 {
-    internal class Meteo: MeteoData
+    public class Meteo: MeteoData
     {
         public double Value { get; set; }
 
@@ -21,7 +15,7 @@ namespace pis1
         {
             Console.WriteLine($"Место измерения: {Place}");
             Console.WriteLine($"Дата измерений: {Date.ToString("yyyy.MM.dd")}");
-            Console.WriteLine($"Результаты измерений: {Value} \n");
+            Console.WriteLine($"Результаты измерений: {Value}");
         }
     }
 }

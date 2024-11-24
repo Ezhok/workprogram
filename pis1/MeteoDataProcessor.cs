@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
+﻿using System.IO;
 using System.Globalization;
+using System;
 
 namespace pis1
 {
-    internal class MeteoDataProcessor
+    public class MeteoDataProcessor
     {
         public static void ProcessData(string input)
         {
             string[] lines = input.Split('|');
-
-            
-
             foreach (string line in lines)
             {
                 string[] parts = line.Split(';');
                 string type = parts[0];
+
+                // Проверка на допустимые типы
+                if (type != "Meteo" && type != "Wind" && type != "Precipitation")
+                {
+                    throw new ArgumentException($"Неверный тип данных: {type}");
+                }
+
                 string place = parts[1].Replace("'", "");
                 string date = parts[2];
-                
 
+                // Ваши существующие проверки и код обработки
                 if (type == "Meteo")
                 {
                     double value = double.Parse(parts[3], CultureInfo.InvariantCulture);
