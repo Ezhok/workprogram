@@ -4,18 +4,21 @@ namespace pis1
 {
     public class Meteo: MeteoData
     {
-        public double Value { get; set; }
+        public double Value { get; private set; }
 
         public Meteo(string place, string date, double value) : base(place, date)
         {
+            if (string.IsNullOrWhiteSpace(date))
+                throw new ArgumentException("Дата не может быть null или пустой.", nameof(date));
+
             Value = value;
         }
 
         public override void DisplayData()
         {
-            Console.WriteLine($"Место измерения: {Place}");
-            Console.WriteLine($"Дата измерений: {Date.ToString("yyyy.MM.dd")}");
-            Console.WriteLine($"Результаты измерений: {Value}");
+            Console.Write($"Место измерения: {Place} ");
+            Console.Write($"Дата измерений: {Date} ");
+            Console.Write($"Результаты измерений: {Value} ");
         }
     }
 }

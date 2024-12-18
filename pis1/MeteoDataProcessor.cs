@@ -14,35 +14,35 @@ namespace pis1
                 string[] parts = line.Split(';');
                 string type = parts[0];
 
-                // Проверка на допустимые типы
-                if (type != "Meteo" && type != "Wind" && type != "Precipitation")
-                {
-                    throw new ArgumentException($"Неверный тип данных: {type}");
-                }
+                if (parts.Length < 4)
+                    throw new ArgumentException($"Неверный формат данных: {line}");
 
                 string place = parts[1].Replace("'", "");
                 string date = parts[2];
 
-                // Ваши существующие проверки и код обработки
                 if (type == "Meteo")
                 {
                     double value = double.Parse(parts[3], CultureInfo.InvariantCulture);
-                    Meteo meteo = new Meteo(place, date, value);
+                    var meteo = new Meteo(place, date, value);
                     meteo.DisplayData();
                 }
                 else if (type == "Wind")
                 {
                     double speed = double.Parse(parts[3], CultureInfo.InvariantCulture);
                     string direction = parts[4];
-                    Wind wind = new Wind(place, date, speed, direction);
+                    var wind = new Wind(place, date, speed, direction);
                     wind.DisplayData();
                 }
                 else if (type == "Precipitation")
                 {
                     double humidity = double.Parse(parts[3], CultureInfo.InvariantCulture);
                     double pressure = double.Parse(parts[4], CultureInfo.InvariantCulture);
-                    Precipitation precipitation = new Precipitation(place, date, humidity, pressure);
+                    var precipitation = new Precipitation(place, date, humidity, pressure);
                     precipitation.DisplayData();
+                }
+                else
+                {
+                    throw new ArgumentException($"Неверный тип данных: {type}");
                 }
             }
         }
@@ -54,4 +54,3 @@ namespace pis1
         }
     }
 }
-

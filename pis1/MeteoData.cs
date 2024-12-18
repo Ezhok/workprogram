@@ -5,25 +5,25 @@ namespace pis1
 {
     public abstract class MeteoData
     {
-        public string Place { get; set; }
-        public DateTime Date { get; set; }
+        public string Place { get; private set; }
+        public string Date { get; private set; }
 
         public MeteoData(string place, string date)
         {
-            Place = place ?? throw new ArgumentNullException(nameof(place));
+            if (string.IsNullOrWhiteSpace(place))
+                throw new ArgumentNullException(nameof(place), "Место измерения не может быть пустым.");
 
-            try
-            {
-                Date = DateTime.ParseExact(date, "yyyy.MM.dd", CultureInfo.InvariantCulture);
-            }
-            catch (FormatException)
-            {
-                throw new ArgumentException($"Некорректный формат даты: {date}. Ожидается формат yyyy.MM.dd.", nameof(date));
-            }
+            if (string.IsNullOrWhiteSpace(date))
+                throw new ArgumentException("Дата не может быть null или пустой.", nameof(date));
+
+            Place = place;
+            Date = date;
         }
 
-        
-
-        public abstract void DisplayData();
+        public virtual void DisplayData()
+        {
+            Console.WriteLine($"Место измерения: {Place}");
+            Console.WriteLine($"Дата измерений: {Date}");
+        }
     }
 }

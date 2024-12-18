@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pis1", "pis1\pis1.csproj", "{6B8E712C-AA2F-4F2B-ABB2-1D71CEC8B1FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteoTests", "MeteoTests\MeteoTests.csproj", "{B740AEE3-2912-4B80-9F9D-DE7DB83336FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeteoTests", "MeteoTests\MeteoTests.csproj", "{B740AEE3-2912-4B80-9F9D-DE7DB83336FA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6B8E712C-AA2F-4F2B-ABB2-1D71CEC8B1FE} = {6B8E712C-AA2F-4F2B-ABB2-1D71CEC8B1FE}
 	EndProjectSection
